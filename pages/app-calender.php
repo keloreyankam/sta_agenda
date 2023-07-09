@@ -86,7 +86,7 @@ $evenements = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Modal title</h5>
+                                        <h5 class="modal-title">Ajouter un evenement</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -107,13 +107,12 @@ $evenements = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             <label for="description">Description :</label>
                                             <textarea class="form-control" type="datetime-local" name="description" id="description" required></textarea>
                                             <br>
-                                            <input class="form-control" type="submit" name="ajouter" value="Ajouter">
-                                        </form>
-
-                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save</button>
+                                        <button class="btn btn-primary" type="submit" name="ajouter" value="Ajouter">enregistrer</button>
+                                    </div>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
