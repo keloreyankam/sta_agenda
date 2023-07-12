@@ -33,6 +33,11 @@
                             <li><a href="./chart-peity.html">Peity</a></li>
                         </ul> -->
                     </li>
+                    <li>
+                        <a class="has-arrow" href="../taches/index.php" aria-expanded="false">
+                            <i class="icon icon-layout-25"></i><span class="nav-text">Tache</span>
+                        </a> 
+                    </li> 
                     <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">Charts</span></a>
                         <ul aria-expanded="false">
