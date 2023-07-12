@@ -2,12 +2,19 @@
 // Connexion à la base de données
 include('../inc/db.php');
 // Récupérer les événements depuis la base de données
-$sql = "SELECT * FROM evenement";
-$stmt = $pdo->prepare($sql);
+$stmt = $pdo->prepare("SELECT * FROM evenement");
 $stmt->execute();
-$evenements = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Retourner les événements au format JSON
-header('Content-Type: application/json');
+$evenements = array();
+
+foreach($resultat as $row) {
+    $evenement = array();
+    $evenement['id'] = $row['id_eve'];
+    $evenement['title'] = $row['nom'];
+    $evenement['start'] = $row['Date_de_debut'];
+    $evenement['end'] = $row['Date_de_fin'];
+    array_push($evenements, $evenement);
+}
+
 echo json_encode($evenements);
-?>

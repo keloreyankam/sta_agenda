@@ -22,6 +22,16 @@
                             </li>
                             <li><a href="./app-calender.html">Calendar</a></li>
                         </ul> -->
+                    </li><li><a class="has-arrow" href="../equipe/index.php" aria-expanded="false"><i
+                                class="icon icon-chart-bar-33"></i><span class="nav-text">Equipe</span></a>
+                        <!-- <ul aria-expanded="false">
+                            <li><a href="./chart-flot.html">Flot</a></li>
+                            <li><a href="./chart-morris.html">Morris</a></li>
+                            <li><a href="./chart-chartjs.html">Chartjs</a></li>
+                            <li><a href="./chart-chartist.html">Chartist</a></li>
+                            <li><a href="./chart-sparkline.html">Sparkline</a></li>
+                            <li><a href="./chart-peity.html">Peity</a></li>
+                        </ul> -->
                     </li>
                     <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">Charts</span></a>

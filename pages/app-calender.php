@@ -5,14 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Focus - Bootstrap Admin Dashboard </title>
+    <title>STA</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png">
 <!-- Inclure la bibliothèque FullCalendar -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' />
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.print.min.css' media='print' />
+
 
     <link href="../css/style.css" rel="stylesheet">
 
@@ -123,7 +122,7 @@ $evenements = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
                 <div class="row">
-                    <?php 
+                    <?php
                         // Formater les événements pour FullCalendar
                         $evenements_format = array();
                         foreach ($evenements as $evenement) {
@@ -132,31 +131,15 @@ $evenements = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 'title' => $evenement['Nom'],
                                 'start' => $evenement['Date_de_debut'],
                                 'end' => $evenement['Date_de_fin'],
+                                'description' => $evenement['Description'],
                             );
                             array_push($evenements_format, $evenement_format);
                         }
 
                     ?>
                         <div id='calendrier'></div>
-                        <div id='formulaire_modification' style='display:none;'>
-                            <form method='post' action=''>
-                            <input type="hidden" name="id" value="<?php echo $evenement['id_eve']; ?>">
-                            <label for="titre">Titre :</label>
-                            <input type="text" name="titre" id="titre" value="<?php echo $evenement['Nom']; ?>" required>
-                            <br>
-                            <label for="date_debut">Date de début :</label>
-                            <input type="datetime-local" name="date_debut" id="date_debut" value="<?php echo date('Y-m-d\TH:i', strtotime($evenement['Date_de_debut'])); ?>" required>
-                            <br>
-                            <label for="date_fin">Date de fin :</label>
-                            <input type="datetime-local" name="date_fin" id="date_fin" value="<?php echo date('Y-m-d\TH:i', strtotime($evenement['Date_de_fin'])); ?>" required>
-                            <br>
-                            <label for="description">Description :</label>
-                            <textarea class="form-control" type="datetime-local" name="description" id="description" required><?php echo $evenement['Nom']; ?></textarea>
-                            <br>
-                            <input type="submit" name="modifier" value="Modifier">
-                                <input type='submit' name='supprimer' value='Supprimer'>
-                            </form>
-                        </div>
+
+                      
                     <!-- <div class="col-lg-3">
                         <div class="card">
                             <div class="card-body">
@@ -290,49 +273,23 @@ $evenements = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="../vendor/fullcalendar/js/fullcalendar.min.js"></script>
     <script src="../js/plugins-init/fullcalendar-init.js"></script>
     <!-- Afficher le calendrier avec les événements -->
-
-<script> 
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+  <script>
 $(document).ready(function() {
-            // Récupérer les événements depuis la base de données
-            $.ajax({
-                url: 'select.php',
-                success: function(events) {
-                    // Formater les événements pour FullCalendar
-                    var events_format = [];
-                    $.each(events, function(index, event) {
-                        var event_format = {
-                            id: event.id,
-                            title: event.titre,
-                            start: event.date_debut,
-                            end: event.date_fin
-                        };
-                        events_format.push(event_format);
-                    });
-                    // Afficher le calendrier avec les événements
-                    $('#calendrier').fullCalendar({
-                        header: {
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: 'month,basicWeek,basicDay'
-                        },
-                        defaultDate: moment().format('YYYY-MM-DD'),
-                        editable: true,
-                        eventLimit: true,
-                        events: events_format,
-                        eventClick: function(event) {
-                            // Afficher le formulaire de modification avec les données de l'événement
-                            $('#id_evenement').val(event.id);
-                            $('#titre').val(event.title);
-                            $('#date_debut').val(moment(event.start).format('YYYY-MM-DDTHH:mm'));
-                            $('#date_fin').val(moment(event.end).format('YYYY-MM-DDTHH:mm'));
-                            $('#formulaire_modification').show();
-                        }
-                    });
-                }
-            });
-        });
+    $('#calendrier').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+        },
+        defaultDate: '<?php echo date('Y-m-d'); ?>',
+        editable: true,
+        eventLimit: true,
+        events: <?php echo json_encode($evenements_format); ?>
+    });
+});
 </script>
-
 </body>
 
 </html>
